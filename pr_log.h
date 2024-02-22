@@ -2,26 +2,22 @@
 #define _PR_lOG_H_
 
 #ifndef PR_LOG_DEFAULT_LEVEL
-#define PR_LOG_DEFAULT_LEVEL    (6)
+#define PR_LOG_DEFAULT_LEVEL    (3)
 #endif
 
-#define LOG_EMERG   "<0>"
-#define LOG_ALERT   "<1>"
-#define LOG_CRIT    "<2>"
-#define LOG_ERROR   "<3>"
-#define LOG_WARN    "<4>"
-#define LOG_NOTICE  "<5>"
-#define LOG_INFO    "<6>"
-#define LOG_DEBUG   "<7>"
+#define LOG_FATAL   "<1>"
+#define LOG_ERROR   "<2>"
+#define LOG_WARN    "<3>"
+#define LOG_INFO    "<4>"
+#define LOG_DEBUG   "<5>"
+#define LOG_TRACE   "<6>"
 
-#define pr_emerg(...)   pr_log_(LOG_EMERG,  __VA_ARGS__)
-#define pr_alert(...)   pr_log_(LOG_ALERT,  __VA_ARGS__)
-#define pr_crit(...)    pr_log_(LOG_CRIT,   __VA_ARGS__)
+#define pr_fatal(...)   pr_log_(LOG_FATAL,  __VA_ARGS__)
 #define pr_error(...)   pr_log_(LOG_ERROR,  __VA_ARGS__)
 #define pr_warn(...)    pr_log_(LOG_WARN,   __VA_ARGS__)
-#define pr_notice(...)  pr_log_(LOG_NOTICE, __VA_ARGS__)
 #define pr_info(...)    pr_log_(LOG_INFO,   __VA_ARGS__)
 #define pr_debug(...)   pr_log_(LOG_DEBUG,  __VA_ARGS__)
+#define pr_trace(...)   pr_log_(LOG_TRACE,  __VA_ARGS__)
 
 #ifndef PR_LOG_DISABLE
 
@@ -53,10 +49,8 @@ extern int pr_log_level(void);
 extern void PRINTF_FMT(1, 2) pr_log_impl(char const *fmt, ...);
 
 #else
-
 #define pr_log_level() (-1)
 #define pr_log_(fmt, args...)
-
 #endif
 
 #endif
