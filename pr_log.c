@@ -9,7 +9,7 @@
 
 #ifndef PR_LOG_DISABLE
 
-int pr_log_ex_level_match(const char *module_name_filter, const char *_module_name)
+static int pr_log_ex_level_match(const char *module_name_filter, const char *_module_name)
 {
     unsigned long seq_len;
     char *seq, *value = (char *)module_name_filter;
