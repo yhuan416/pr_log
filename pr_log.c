@@ -2,10 +2,7 @@
 
 #include <stdio.h>
 #include <strings.h>
-#include <ctype.h>
 #include <stdarg.h>
-#include <stdbool.h>
-#include <limits.h>
 
 #ifndef PR_LOG_DISABLE
 
