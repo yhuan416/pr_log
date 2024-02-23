@@ -1,46 +1,93 @@
 #include "pr_log.h"
 
 #include <stdio.h>
+#include <strings.h>
 #include <ctype.h>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <limits.h>
 
-#define DEBUG_NEED_INIT INT_MIN
-static int debug = DEBUG_NEED_INIT;
-
 #ifndef PR_LOG_DISABLE
-int pr_log_level(void)
-{
-    if (debug != DEBUG_NEED_INIT)
-        return debug;
 
-    char *c = getenv("pr_log_level");// pr_log_ex_level_0
-    if (!c)
+int pr_log_ex_level_match(const char *module_name_filter, const char *_module_name)
+{
+    unsigned long seq_len;
+    char *seq, *value = (char *)module_name_filter;
+    if (NULL == value)
     {
-        debug = PR_LOG_DEFAULT_LEVEL;
-        return debug;
+        return -1;
+    }
+    while (*value)
+    {
+        while ((',' == *value) || (';' == *value) || (' ' == *value) || ('\t' == *value))
+        {
+            ++value;
+        };
+        seq = value;
+        for (seq_len = 0; ((0 != seq[seq_len]) && (',' != seq[seq_len]) && (';' != seq[seq_len]) && (' ' != seq[seq_len]) && ('\t' != seq[seq_len])); ++seq_len)
+        {
+        };
+        if (seq_len)
+        {
+            if ((0 == strncasecmp(seq, _module_name, seq_len)))
+            {
+                return 0;
+            }
+        }
+        value += seq_len;
+        if (*value)
+        {
+            ++value; /* skip seq */
+        };
+    }
+    return -1;
+}
+
+int pr_log_level(const char *_module_name)
+{
+    int log_level = PR_LOG_DEFAULT_LEVEL;
+
+    char *c = getenv("pr_log_level");
+    if (c)
+    {
+        log_level = atoi(c);
     }
 
-    debug = atoi(c);
-    return debug;
+    if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_0"), _module_name))
+    {
+        log_level = 0;
+    }
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_1"), _module_name))
+    {
+        log_level = 1;
+    }
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_2"), _module_name))
+    {
+        log_level = 2;
+    }
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_3"), _module_name))
+    {
+        log_level = 3;
+    }
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_4"), _module_name))
+    {
+        log_level = 4;
+    }
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_5"), _module_name))
+    {
+        log_level = 5;
+    }
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_6"), _module_name))
+    {
+        log_level = 6;
+    }
+
+    return log_level;
 }
 #endif
 
-static inline bool debug_is(int lvl)
-{
-    return lvl <= pr_log_level();
-}
-
 void pr_log_impl(char const *fmt, ...)
 {
-    int level = INT_MIN;
-    if (fmt[0] == '<' && isdigit(fmt[1]) && fmt[2] == '>')
-        level = fmt[1] - '0';
-
-    if (!debug_is(level))
-        return;
-
     va_list va;
     va_start(va, fmt);
     vfprintf(stdout, fmt, va);
