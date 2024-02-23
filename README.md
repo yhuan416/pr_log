@@ -1,5 +1,7 @@
 # pr_log
 
+A Simple Log Library for C
+
 ## 等级
 
 | OFF | FATAL | ERROR | WARN | INFO | DEBUG | TRACE |
