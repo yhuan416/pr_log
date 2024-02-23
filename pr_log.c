@@ -15,7 +15,7 @@ int pr_log_level(void)
     if (debug != DEBUG_NEED_INIT)
         return debug;
 
-    char *c = getenv("pr_log_level");
+    char *c = getenv("pr_log_level");// pr_log_ex_level_0
     if (!c)
     {
         debug = PR_LOG_DEFAULT_LEVEL;
@@ -43,6 +43,6 @@ void pr_log_impl(char const *fmt, ...)
 
     va_list va;
     va_start(va, fmt);
-    vfprintf(stderr, fmt, va);
+    vfprintf(stdout, fmt, va);
     va_end(va);
 }

@@ -1,9 +1,15 @@
 #include <stdio.h>
 
+#define module_name "main"
 #include "pr_log.h"
 
 int main(int argc, char const *argv[])
 {
+#undef func_format_s
+#undef func_format
+#define func_format_s "main(%d,%p)"
+#define func_format() argc, argv
+
     pr_fatal("pr_fatal %d", 1);
     pr_error("pr_error %d", 2);
     pr_warn("pr_warn %d", 3);
