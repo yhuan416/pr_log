@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
 
 ``` sh
 <1> [0000234532.314][1438553][main] main(1,0x7ffca8d674f8)      pr_fatal 1
-<日志等级> [时间戳][tid][模块名] ${func_format_s} \t${log}
+<日志等级> [时间戳][tid][模块名] ${func_format_s}\t${log}
 ```
 
 ## 修改打印等级
