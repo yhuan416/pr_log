@@ -46,7 +46,7 @@ int main(int argc, char const *argv[])
 ``` sh
 添加宏 -DPR_LOG_DEFAULT_LEVEL=0 [0 - 6]
 
-> ./test/test
+> ./test/demo
 <1> [0000235275.825][1444070][main] main(1,0x7ffeb0d2ea78)      pr_fatal 1
 <2> [0000235275.825][1444070][main] main(1,0x7ffeb0d2ea78)      pr_error 2
 <3> [0000235275.825][1444070][main] main(1,0x7ffeb0d2ea78)      pr_warn 3
@@ -59,7 +59,7 @@ int main(int argc, char const *argv[])
 ``` sh
 export pr_log_level=0 [0 - 6]
 
-> pr_log_level=5 ./test/test
+> pr_log_level=5 ./test/demo
 <1> [0000235263.302][1443984][main] main(1,0x7ffffa8428d8)      pr_fatal 1
 <2> [0000235263.302][1443984][main] main(1,0x7ffffa8428d8)      pr_error 2
 <3> [0000235263.302][1443984][main] main(1,0x7ffffa8428d8)      pr_warn 3
@@ -74,7 +74,7 @@ export pr_log_level=0 [0 - 6]
 
 3. 运行时制定模块的打印等级
 ``` sh
-> pr_log_level=5 pr_log_level_ex_1=main pr_log_level_ex_4=mod1 ./test/test
+> pr_log_level=5 pr_log_level_ex_1=main pr_log_level_ex_4=mod1 ./test/demo
 <1> [0000235239.258][1443803][main] main(1,0x7ffd6337c2a8)      pr_fatal 1
 <1> [0000235239.258][1443803][mod1] mod1_say_hello(0)   pr_fatal 0
 <2> [0000235239.258][1443803][mod1] mod1_say_hello(0)   pr_error 0

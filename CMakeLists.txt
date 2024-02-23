@@ -1,9 +1,14 @@
 cmake_minimum_required(VERSION 3.5)
 
+option(BUILD_TEST "Build test" OFF)
+
 project(pr_log)
 
 # pr_log
 add_library(pr_log STATIC pr_log.c)
 target_include_directories(pr_log PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_subdirectory(test)
+enable_testing()
+if (BUILD_TEST)
+    add_subdirectory(test)
+endif ()
