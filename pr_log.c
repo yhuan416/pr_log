@@ -53,31 +53,31 @@ int pr_log_level(const char *_module_name)
         log_level = atoi(c);
     }
 
-    if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_0"), _module_name))
+    if (0 == pr_log_ex_level_match(getenv("pr_log_level_ex_0"), _module_name))
     {
         log_level = 0;
     }
-    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_1"), _module_name))
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_level_ex_1"), _module_name))
     {
         log_level = 1;
     }
-    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_2"), _module_name))
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_level_ex_2"), _module_name))
     {
         log_level = 2;
     }
-    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_3"), _module_name))
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_level_ex_3"), _module_name))
     {
         log_level = 3;
     }
-    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_4"), _module_name))
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_level_ex_4"), _module_name))
     {
         log_level = 4;
     }
-    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_5"), _module_name))
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_level_ex_5"), _module_name))
     {
         log_level = 5;
     }
-    else if (0 == pr_log_ex_level_match(getenv("pr_log_ex_level_6"), _module_name))
+    else if (0 == pr_log_ex_level_match(getenv("pr_log_level_ex_6"), _module_name))
     {
         log_level = 6;
     }

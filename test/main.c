@@ -3,6 +3,8 @@
 #define module_name "main"
 #include "pr_log.h"
 
+int mod1_say_hello(int i);
+
 int main(int argc, char const *argv[])
 {
 #undef func_format_s
@@ -16,6 +18,8 @@ int main(int argc, char const *argv[])
     pr_info("pr_info %d", 4);
     pr_debug("pr_debug %d", 5);
     pr_trace("pr_trace %d", 6);
+
+    mod1_say_hello(0);
 
     return 0;
 }
