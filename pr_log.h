@@ -22,14 +22,6 @@
 #ifndef PR_LOG_DISABLE
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/syscall.h>
-#include <time.h>
-
-#ifndef CLOCK_MONOTONIC
-#define CLOCK_MONOTONIC (1)
-#endif
 
 #define PRINTF_FMT(a, b) \
     __attribute__((format(printf, a, b)))
@@ -44,7 +36,7 @@
 #endif
 
 extern int pr_log_level(const char *_module_name);
-extern void PRINTF_FMT(1, 2) pr_log_impl(char const *fmt, ...);
+extern void PRINTF_FMT(3, 4) pr_log_extern(int logv, const char *_module_name, const char *fmt, ...);
 
 static long pr_log_level_extern(void)
 {
@@ -57,17 +49,13 @@ static long pr_log_level_extern(void)
     return pr_log_level_local;
 }
 
-#define pr_log_(logv, fmt, args...)                                               \
-    do                                                                            \
-    {                                                                             \
-        if (logv > pr_log_level_extern())                                         \
-            break;                                                                \
-        struct timespec ts;                                                       \
-        int pid = syscall(SYS_gettid);                                            \
-        clock_gettime(CLOCK_MONOTONIC, &ts);                                      \
-        pr_log_impl("<%d> [%010ld.%03ld][%04d][%s] " func_format_s "\t" fmt "\n", \
-                    logv, ts.tv_sec, ts.tv_nsec / 1000000, pid,                   \
-                    module_name, func_format(), ##args);                          \
+#define pr_log_(logv, fmt, args...)                              \
+    do                                                           \
+    {                                                            \
+        if (logv > pr_log_level_extern())                        \
+            break;                                               \
+        pr_log_extern(logv, module_name, func_format_s "\t" fmt, \
+                      func_format(), ##args);                    \
     } while (0)
 
 #else

@@ -1,8 +1,8 @@
 #include "pr_log.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <strings.h>
-#include <stdarg.h>
 
 #ifndef PR_LOG_DISABLE
 
@@ -81,12 +81,5 @@ int pr_log_level(const char *_module_name)
 
     return log_level;
 }
-#endif
 
-void pr_log_impl(char const *fmt, ...)
-{
-    va_list va;
-    va_start(va, fmt);
-    vfprintf(stdout, fmt, va);
-    va_end(va);
-}
+#endif
