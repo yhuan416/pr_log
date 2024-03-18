@@ -35,6 +35,27 @@ int main(int argc, char const *argv[])
 }
 ```
 
+## 自定义打印函数
+可以修改 pr_log_extern.c 文件中 pr_log_extern 函数，实现自定义的打印函数。
+
+``` c
+void pr_log_extern(int logv, const char *_module_name, const char *fmt, ...)
+{
+    va_list va;
+    struct timespec ts;
+    int pid = syscall(SYS_gettid);
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+
+    char pr_log_out_buf[PR_LOG_OUT_BUF_SIZE] = {0};
+
+    va_start(va, fmt);
+    vsnprintf(pr_log_out_buf, PR_LOG_OUT_BUF_SIZE, fmt, va);
+    va_end(va);
+
+    printf("<%d> [%010ld.%03ld][%04d][%s] %s\n", logv, ts.tv_sec, ts.tv_nsec / 1000000, pid, _module_name, pr_log_out_buf);
+}
+```
+
 ## 日志格式
 
 ``` sh
