@@ -65,7 +65,7 @@ void pr_log_extern(int logv, const char *module_name, const char *fmt, ...)
 
 ## 修改打印等级
 
-1. 构建时修改默认打印等级
+1. 构建时修改默认打印等级, 调整该选项可以减小编译后的代码大小
 ``` sh
 添加宏 -DPR_LOG_DEFAULT_LEVEL=0 [0 - 6]
 

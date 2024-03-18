@@ -12,12 +12,41 @@
 #define LOG_DEBUG (5)
 #define LOG_TRACE (6)
 
+#if PR_LOG_DEFAULT_LEVEL >= LOG_FATAL
 #define pr_fatal(...) pr_log_(LOG_FATAL, __VA_ARGS__)
+#else
+#define pr_fatal(...)
+#endif
+
+#if PR_LOG_DEFAULT_LEVEL >= LOG_ERROR
 #define pr_error(...) pr_log_(LOG_ERROR, __VA_ARGS__)
+#else
+#define pr_error(...)
+#endif
+
+#if PR_LOG_DEFAULT_LEVEL >= LOG_WARN
 #define pr_warn(...) pr_log_(LOG_WARN, __VA_ARGS__)
+#else
+#define pr_warn(...)
+#endif
+
+#if PR_LOG_DEFAULT_LEVEL >= LOG_INFO
 #define pr_info(...) pr_log_(LOG_INFO, __VA_ARGS__)
+#else
+#define pr_info(...)
+#endif
+
+#if PR_LOG_DEFAULT_LEVEL >= LOG_DEBUG
 #define pr_debug(...) pr_log_(LOG_DEBUG, __VA_ARGS__)
+#else
+#define pr_debug(...)
+#endif
+
+#if PR_LOG_DEFAULT_LEVEL >= LOG_TRACE
 #define pr_trace(...) pr_log_(LOG_TRACE, __VA_ARGS__)
+#else
+#define pr_trace(...)
+#endif
 
 #ifndef PR_LOG_DISABLE
 
