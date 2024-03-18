@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define module_name "main"
+#define mmodule_name "main"
 #include "pr_log.h"
 
 int mod1_say_hello(int i);

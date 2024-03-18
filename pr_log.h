@@ -26,8 +26,8 @@
 #define PRINTF_FMT(a, b) \
     __attribute__((format(printf, a, b)))
 
-#if !defined(module_name)
-#define module_name "unknown"
+#if !defined(mmodule_name)
+#define mmodule_name "unknown"
 #endif
 
 #if !defined(func_format)
@@ -35,8 +35,8 @@
 #define func_format() "..."
 #endif
 
-extern int pr_log_level(const char *_module_name);
-extern void PRINTF_FMT(3, 4) pr_log_extern(int logv, const char *_module_name, const char *fmt, ...);
+extern int pr_log_level(const char *module_name);
+extern void PRINTF_FMT(3, 4) pr_log_extern(int logv, const char *module_name, const char *fmt, ...);
 
 static long pr_log_level_extern(void)
 {
@@ -44,7 +44,7 @@ static long pr_log_level_extern(void)
     static long pr_log_level_local = NEED_INIT;
     if (pr_log_level_local == NEED_INIT)
     {
-        pr_log_level_local = pr_log_level(module_name);
+        pr_log_level_local = pr_log_level(mmodule_name);
     }
     return pr_log_level_local;
 }
@@ -54,7 +54,7 @@ static long pr_log_level_extern(void)
     {                                                            \
         if (logv > pr_log_level_extern())                        \
             break;                                               \
-        pr_log_extern(logv, module_name, func_format_s "\t" fmt, \
+        pr_log_extern(logv, mmodule_name, func_format_s "\t" fmt, \
                       func_format(), ##args);                    \
     } while (0)
 

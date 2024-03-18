@@ -11,7 +11,7 @@
 
 #define PR_LOG_OUT_BUF_SIZE (128)
 
-void pr_log_extern(int logv, const char *_module_name, const char *fmt, ...)
+void pr_log_extern(int logv, const char *module_name, const char *fmt, ...)
 {
     va_list va;
     struct timespec ts;
@@ -24,5 +24,5 @@ void pr_log_extern(int logv, const char *_module_name, const char *fmt, ...)
     vsnprintf(pr_log_out_buf, PR_LOG_OUT_BUF_SIZE, fmt, va);
     va_end(va);
 
-    printf("<%d> [%010ld.%03ld][%04d][%s] %s\n", logv, ts.tv_sec, ts.tv_nsec / 1000000, pid, _module_name, pr_log_out_buf);
+    printf("<%d> [%010ld.%03ld][%04d][%s] %s\n", logv, ts.tv_sec, ts.tv_nsec / 1000000, pid, module_name, pr_log_out_buf);
 }
