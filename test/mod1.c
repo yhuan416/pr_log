@@ -15,7 +15,7 @@ int mod1_say_hello(int i)
     pr_warn("pr_warn %d", i);
     pr_info("pr_info %d", i);
     pr_debug("pr_debug %d", i);
-    pr_trace("pr_trace %d", i);
+    pr_verbose("pr_verbose %d", i);
 
     return 0;
 }

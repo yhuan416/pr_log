@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
     pr_warn("pr_warn %d", 3);
     pr_info("pr_info %d", 4);
     pr_debug("pr_debug %d", 5);
-    pr_trace("pr_trace %d", 6);
+    pr_verbose("pr_verbose %d", 6);
 
     mod1_say_hello(0);
 

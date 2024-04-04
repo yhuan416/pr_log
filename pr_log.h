@@ -5,12 +5,12 @@
 #define PR_LOG_DEFAULT_LEVEL (3)
 #endif
 
-#define LOG_FATAL (1)
-#define LOG_ERROR (2)
-#define LOG_WARN (3)
-#define LOG_INFO (4)
-#define LOG_DEBUG (5)
-#define LOG_TRACE (6)
+#define LOG_FATAL (0)
+#define LOG_ERROR (1)
+#define LOG_WARN (2)
+#define LOG_INFO (3)
+#define LOG_DEBUG (4)
+#define LOG_VERBOSE (5)
 
 #if PR_LOG_DEFAULT_LEVEL >= LOG_FATAL
 #define pr_fatal(...) pr_log_(LOG_FATAL, __VA_ARGS__)
@@ -42,10 +42,10 @@
 #define pr_debug(...)
 #endif
 
-#if PR_LOG_DEFAULT_LEVEL >= LOG_TRACE
-#define pr_trace(...) pr_log_(LOG_TRACE, __VA_ARGS__)
+#if PR_LOG_DEFAULT_LEVEL >= LOG_VERBOSE
+#define pr_verbose(...) pr_log_(LOG_VERBOSE, __VA_ARGS__)
 #else
-#define pr_trace(...)
+#define pr_verbose(...)
 #endif
 
 #ifndef PR_LOG_DISABLE
@@ -78,13 +78,13 @@ static long pr_log_level_extern(void)
     return pr_log_level_local;
 }
 
-#define pr_log_(logv, fmt, args...)                              \
-    do                                                           \
-    {                                                            \
-        if (logv > pr_log_level_extern())                        \
-            break;                                               \
+#define pr_log_(logv, fmt, args...)                               \
+    do                                                            \
+    {                                                             \
+        if (logv > pr_log_level_extern())                         \
+            break;                                                \
         pr_log_extern(logv, mmodule_name, func_format_s "\t" fmt, \
-                      func_format(), ##args);                    \
+                      func_format(), ##args);                     \
     } while (0)
 
 #else

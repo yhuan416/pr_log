@@ -4,9 +4,9 @@ A Simple Log Library for C
 
 ## 等级
 
-| OFF | FATAL | ERROR | WARN | INFO | DEBUG | TRACE |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+| OFF | ERROR | WARN | INFO | DEBUG | VERBOSE |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 1 | 2 | 3 | 4 | 5 |
 
 ## 使用方法
 ``` c
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
     pr_warn("pr_warn %d", 3);
     pr_info("pr_info %d", 4);
     pr_debug("pr_debug %d", 5);
-    pr_trace("pr_trace %d", 6);
+    pr_verbose("pr_verbose %d", 6);
 
     return 0;
 }
